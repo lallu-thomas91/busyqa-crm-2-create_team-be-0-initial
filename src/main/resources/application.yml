@@ -1,0 +1,85 @@
+# Tomcat Server
+server:
+  port: 8080
+
+# Logger
+logging.level:
+  web: DEBUG
+  com.busyqa.coop: DEBUG
+  org.hibernate.type: INFO
+  
+# Active Profile
+spring:
+  profiles:
+    active: prod
+    
+# Banner Text
+  banner:
+    charset: UTF-8
+    location: classpath:/banner/busyQA.txt
+
+# Jackson Settings
+  jackson:
+    date-format: "yyyy-MM-dd"    
+    
+---
+
+# Default Profile
+spring:
+  profiles: default
+  
+# Database Settings
+  datasource:
+    url: jdbc:mysql://localhost:3306/busyqacrmusersdb?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&serverTimezone=UTC 
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    tomcat:
+      max-wait: 10000
+      max-active: 15
+      max-idle: 10
+      initial-size: 3
+      test-on-borrow: true
+    continue-on-error: false
+  jpa:
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        ddl-auto: validate
+        '[format_sql]': true
+        use-new-id-generator-mappings: true
+        dialect: org.hibernate.dialect.MySQLDialect
+        naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+
+---
+
+# Prod Profile
+spring:
+  profiles: prod
+  
+# Database Settings 
+  datasource:
+    url: jdbc:mysql://busyqacrmusersdb.cerqgxahtu7g.us-east-2.rds.amazonaws.com:3306/busyqacrmusersdb?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: admin
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    continue-on-error: false
+  jpa:
+    show-sql: true
+    open-in-view: false
+    generate-ddl: true
+    properties:
+      hibernate:
+        ddl-auto: update
+        '[format_sql]': true
+        use-new-id-generator-mappings: true
+        dialect: org.hibernate.dialect.MySQLDialect
+        naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy 
+  sql:
+    init:
+      continue-on-error: false
+  config:
+    activate:
+      on-profile: prod
+    

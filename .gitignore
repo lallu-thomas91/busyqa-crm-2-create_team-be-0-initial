@@ -1,0 +1,39 @@
+### General ###
+
+.bash_history
+
+Servers/
+RemoteSystemsTempFiles/
+.metadata/
+.recommenders/
+.gradle/
+.settings/
+.aws/
+.mvn/
+bin/
+build/
+target/
+
+!gradle/wrapper/gradle-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
